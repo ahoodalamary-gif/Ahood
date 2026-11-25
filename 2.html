@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>عهود العماري | Sakura World</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --pink:#f5a9c8;
+  --rose:#d86c9d;
+  --dark:#100d18;
+  --purple:#24162d;
+  --light:#fff0f7;
+  --muted:#c9b8ce;
+}
+
+* {
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  scroll-behavior:smooth;
+}
+
+body {
+  font-family:'Cairo',sans-serif;
+  background:var(--dark);
+  color:var(--light);
+  overflow-x:hidden;
+}
+
+#petals {
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:10;
+}
+
+.petal {
+  position:absolute;
+  top:-30px;
+  width:13px;
+  height:18px;
+  background:linear-gradient(135deg,#ffe0ee,#e982b2);
+  border-radius:80% 10% 80% 10%;
+  opacity:.8;
+  animation:fall linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform:translate3d(120px,110vh,0) rotate(720deg);
+  }
+}
+
+nav {
+  position:fixed;
+  top:0;
+  width:100%;
+  padding:15px 7%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:rgba(16,13,24,.85);
+  backdrop-filter:blur(15px);
+  z-index:20;
+  border-bottom:1px solid rgba(245,169,200,.15);
+}
+
+.logo {
+  color:var(--pink);
+  font-size:22px;
+  font-weight:900;
+}
+
+nav a {
+  color:var(--light);
+  text-decoration:none;
+  margin:0 9px;
+  font-size:13px;
+  transition:.3s;
+}
+
+nav a:hover {
+  color:var(--pink);
+}
+
+.hero {
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:120px 20px 80px;
+  position:relative;
+  background:
+    radial-gradient(ellipse at 50% 35%,rgba(150,75,125,.3),transparent 55%),
+    linear-gradient(140deg,#100d18,#29182f,#100d18);
+  overflow:hidden;
+  perspective:1000px;
+}
+
+.hero::before {
+  content:"🌸";
+  position:absolute;
+  font-size:250px;
+  opacity:.07;
+  top:10%;
+  left:5%;
+  animation:float 7s ease-in-out infinite;
+}
+
+.hero-content {
+  max-width:850px;
+  transition:transform .2s ease;
+  transform-style:preserve-3d;
+}
+
+.eyebrow {
+  color:var(--pink);
+  letter-spacing:4px;
+  font-size:13px;
+  margin-bottom:20px;
+}
+
+.hero h1 {
+  font-size:clamp(45px,8vw,85px);
+  line-height:1.4;
+  font-weight:900;
+  background:linear-gradient(90deg,#fff,#f5a9c8,#d88ac0);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.hero h2 {
+  font-size:clamp(18px,3vw,26px);
+  color:#e9c5db;
+  margin:12px 0;
+}
+
+.hero p {
+  color:var(--muted);
+  max-width:650px;
+  margin:20px auto 30px;
+  line-height:2.2;
+}
+
+.btn {
+  display:inline-block;
+  padding:12px 28px;
+  margin:8px;
+  border-radius:30px;
+  text-decoration:none;
+  background:linear-gradient(120deg,#e982b2,#a85d91);
+  color:white;
+  font-weight:800;
+  transition:.3s;
+  box-shadow:0 8px 30px rgba(216,108,157,.2);
+}
+
+.btn:hover {
+  transform:translateY(-5px) scale(1.03);
+  box-shadow:0 12px 35px rgba(216,108,157,.4);
+}
+
+.btn.outline {
+  background:transparent;
+  border:1px solid var(--pink);
+  color:var(--pink);
+}
+
+section {
+  padding:100px 8%;
+  position:relative;
+}
+
+.section-title {
+  text-align:center;
+  margin-bottom:50px;
+}
+
+.section-title span {
+  color:var(--pink);
+  font-size:13px;
+  letter-spacing:3px;
+}
+
+.section-title h2 {
+  font-size:clamp(27px,4vw,40px);
+  margin-top:10px;
+}
+
+.section-title h2::after {
+  content:"";
+  display:block;
+  width:65px;
+  height:3px;
+  background:var(--rose);
+  margin:12px auto;
+  border-radius:10px;
+}
+
+.about,.skills,.contact {
+  background:#17111f;
+}
+
+.about-card {
+  max-width:900px;
+  margin:auto;
+  padding:40px;
+  border:1px solid rgba(245,169,200,.2);
+  background:linear-gradient(145deg,rgba(75,43,70,.5),rgba(30,22,39,.8));
+  border-radius:25px;
+  box-shadow:0 20px 60px rgba(0,0,0,.2);
+  line-height:2.3;
+  color:#e7d9e7;
+  transition:.4s;
+}
+
+.about-card:hover {
+  transform:translateY(-7px);
+  border-color:var(--pink);
+}
+
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:22px;
+}
+
+.card {
+  padding:27px;
+  border-radius:20px;
+  background:linear-gradient(145deg,#281a30,#191321);
+  border:1px solid rgba(245,169,200,.15);
+  transition:.4s;
+  overflow:hidden;
+}
+
+.card:hover {
+  transform:translateY(-9px) rotateX(2deg);
+  border-color:var(--pink);
+  box-shadow:0 15px 35px rgba(216,108,157,.12);
+}
+
+.symbol {
+  font-size:32px;
+  margin-bottom:14px;
+}
+
+.card h3 {
+  color:var(--pink);
+  margin-bottom:10px;
+  font-size:19px;
+}
+
+.card p {
+  color:var(--muted);
+  font-size:14px;
+  line-height:2;
+}
+
+.skill {
+  margin-bottom:25px;
+}
+
+.skill-info {
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:9px;
+  font-size:14px;
+}
+
+.bar {
+  height:9px;
+  border-radius:20px;
+  background:#39283e;
+  overflow:hidden;
+}
+
+.fill {
+  height:100%;
+  border-radius:20px;
+  background:linear-gradient(90deg,#a85d91,#f5a9c8);
+}
+
+.portfolio-card {
+  max-width:680px;
+  width:100%;
+  margin:auto;
+  text-align:center;
+  padding:45px 30px;
+  background:
+    radial-gradient(circle at top,rgba(245,169,200,.18),transparent 60%),
+    linear-gradient(145deg,#38213e,#1c1424);
+  border:1px solid rgba(245,169,200,.35);
+  border-radius:28px;
+  box-shadow:0 20px 60px rgba(0,0,0,.25);
+  transition:.4s;
+}
+
+.portfolio-card:hover {
+  transform:translateY(-8px) scale(1.01);
+  border-color:var(--pink);
+}
+
+.portfolio-card .symbol {
+  font-size:55px;
+}
+
+.contact-item {
+  padding:20px;
+  background:#24192c;
+  border-radius:15px;
+  border:1px solid rgba(245,169,200,.12);
+  line-height:2;
+}
+
+.contact-item h3 {
+  color:var(--pink);
+  margin-bottom:8px;
+}
+
+.contact-item a {
+  color:#fff0f7;
+  text-decoration:none;
+  overflow-wrap:anywhere;
+}
+
+.contact-item a:hover {
+  color:var(--pink);
+}
+
+footer {
+  text-align:center;
+  padding:30px;
+  color:#bda9bd;
+  font-size:13px;
+  background:#100d18;
+}
+
+.reveal {
+  opacity:0;
+  transform:translateY(35px);
+  transition:.8s ease;
+}
+
+.reveal.show {
+  opacity:1;
+  transform:translateY(0);
+}
+
+@keyframes float {
+  50% {transform:translateY(-25px) rotate(12deg);}
+}
+
+@media(max-width:700px) {
+  nav {
+    padding:12px 4%;
+  }
+  nav .links {
+    display:none;
+  }
+  section {
+    padding:75px 6%;
+  }
+  .about-card {
+    padding:25px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="petals"></div>
+
+<nav>
+  <div class="logo">🌸 Ahood</div>
+  <div class="links">
+    <a href="#about">نبذة عني</a>
+    <a href="#interests">اهتماماتي</a>
+    <a href="#courses">الدورات</a>
+    <a href="#skills">مسارات التعلم</a>
+    <a href="#projects">معرض الأعمال</a>
+    <a href="#contact">التواصل</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-content" id="heroContent">
+    <div class="eyebrow">WELCOME TO MY WORLD</div>
+    <h1>عهود العماري</h1>
+    <h2>شبكات وأمن المعلومات</h2>
+    <p>
+      رحلة شغف في عالم التقنية، حيث تلتقي المعرفة بالإبداع.
+      أسعى لاكتشاف آفاق الأمن السيبراني والبرمجة
+      وتطوير الحلول الرقمية.
+    </p>
+    <a href="#about" class="btn">اكتشف عالمي</a>
+    <a href="#projects" class="btn outline">معرض أعمالي</a>
+  </div>
+</header>
+
+<section class="about" id="about">
+  <div class="section-title reveal">
+    <span>MY STORY</span>
+    <h2>نبذة عني</h2>
+  </div>
+
+  <div class="about-card reveal">
+    أنا عهود العماري، مهتمة بمجال شبكات وأمن المعلومات،
+    وأسعى إلى تطوير معرفتي ومهاراتي في عالم التقنية.
+
+    أطمح إلى التعمق في الأمن السيبراني والاختبار الأخلاقي
+    والبرمجة وتطوير المواقع والشبكات والحماية الرقمية.
+
+    أؤمن بأن التعلم المستمر والتجربة العملية هما أساس
+    بناء الخبرة وتحويل الأفكار إلى مشاريع واقعية.
+  </div>
+</section>
+
+<section id="interests">
+  <div class="section-title reveal">
+    <span>MY INTERESTS</span>
+    <h2>مجالات اهتمامي</h2>
+  </div>
+
+  <div class="grid">
+    <div class="card reveal">
+      <div class="symbol">🛡️</div>
+      <h3>الأمن السيبراني</h3>
+      <p>الاهتمام بحماية الأنظمة والبيانات وفهم أساليب الأمن الرقمي.</p>
+    </div>
+
+    <div class="card reveal">
+      <div class="symbol">🔐</div>
+      <h3>الاختبار الأخلاقي</h3>
+      <p>التعرف على اختبار الأنظمة واكتشاف نقاط الضعف بصورة قانونية وأخلاقية.</p>
+    </div>
+
+    <div class="card reveal">
+      <div class="symbol">💻</div>
+      <h3>البرمجة والتطوير</h3>
+      <p>إنشاء المواقع والمشاريع الرقمية وتطوير الأفكار البرمجية.</p>
+    </div>
+
+    <div class="card reveal">
+      <div class="symbol">🌐</div>
+      <h3>الشبكات</h3>
+      <p>فهم الشبكات والبنية التحتية والاتصالات والحماية.</p>
+    </div>
+  </div>
+</section>
+
+<section class="skills" id="courses">
+  <div class="section-title reveal">
+    <span>MY CERTIFICATES</span>
+    <h2>الدورات المكتملة</h2>
+  </div>
+
+  <div class="grid">
+    <div class="card reveal">
+      <div class="symbol">🧠</div>
+      <h3>التفكير النقدي في عصر الذكاء الاصطناعي</h3>
+      <p>دورة مكتملة</p>
+    </div>
+
+    <div class="card reveal">
+      <div class="symbol">👩‍💼</div>
+      <h3>القيادة الفعّالة</h3>
+      <p>دورة مكتملة</p>
+    </div>
+
+    <div class="card reveal">
+      <div class="symbol">🔒</div>
+      <h3>مقدمة للتوعية بالأمن السيبراني</h3>
+      <p>دورة مكتملة</p>
+    </div>
+
+    <div class="card reveal">
+      <div class="symbol">📊</div>
+      <h3>التطبيقات المكتبية والرقمية من مايكروسوفت</h3>
+      <p>دورة مكتملة</p>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-title reveal">
+    <span>MY LEARNING JOURNEY</span>
+    <h2>مساراتي التعليمية</h2>
+  </div>
+
+  <div class="about-card reveal">
+
+    <div class="skill">
+      <div class="skill-info">
+        <span>دبلوم اللغة الإنجليزية</span>
+        <span>60%</span>
+      </div>
+      <div class="bar"><div class="fill" style="width:60%"></div></div>
+    </div>
+
+    <div class="skill">
+      <div class="skill-info">
+        <span>بكالوريوس شبكات وأمن المعلومات</span>
+        <span>20%</span>
+      </div>
+      <div class="bar"><div class="fill" style="width:20%"></div></div>
+    </div>
+
+    <div class="skill">
+      <div class="skill-info">
+        <span>Linux+</span>
+        <span>80%</span>
+      </div>
+      <div class="bar"><div class="fill" style="width:80%"></div></div>
+    </div>
+
+    <div class="skill">
+      <div class="skill-info">
+        <span>Bash Script</span>
+        <span>30%</span>
+      </div>
+      <div class="bar"><div class="fill" style="width:30%"></div></div>
+    </div>
+
+    <div class="skill">
+      <div class="skill-info">
+        <span>PTS</span>
+        <span>10%</span>
+      </div>
+      <div class="bar"><div class="fill" style="width:10%"></div></div>
+    </div>
+
+    <p style="color:var(--muted);font-size:12px;margin-top:20px">
+      النسب تمثل مستوى التقدم في مسارات التعلم.
+    </p>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-title reveal">
+    <span>MY PORTFOLIO</span>
+    <h2>معرض أعمالي</h2>
+  </div>
+
+  <div class="portfolio-card reveal">
+    <div class="symbol">🌸</div>
+    <h3>معرض أعمال عهود العماري</h3>
+    <p>
+      وجهة تجمع مشاريعي الرقمية والإبداعية،
+      وتتضمن متجر الساعات ÉON ومتجر القهوة MADA،
+      بالإضافة إلى تجاربي في التصميم والتطوير.
+    </p>
+
+    <a class="btn" href="index.html">
+      انقر لاستكشاف معرض الأعمال
+    </a>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="section-title reveal">
+    <span>GET IN TOUCH</span>
+    <h2>تواصل معي</h2>
+  </div>
+
+  <div class="grid">
+    <div class="contact-item reveal">
+      <h3>📧 البريد الإلكتروني</h3>
+      <a href="mailto:ahoodalamary@gmail.com">
+        ahoodalamary@gmail.com
+      </a>
+    </div>
+
+    <div class="contact-item reveal">
+      <h3>📱 رقم التواصل</h3>
+      <a href="tel:+966531488857" dir="ltr">
+        +966531488857
+      </a>
+    </div>
+
+    <div class="contact-item reveal">
+      <h3>💼 LinkedIn</h3>
+      <a href="https://www.linkedin.com/search/results/people/?keywords=Ahood%20Al-Amary" target="_blank" rel="noopener noreferrer">
+        Ahood Al-Amary
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>صُممت بشغف 🌸 | Ahood Al-Amary</p>
+  <p>© 2026 جميع الحقوق محفوظة</p>
+</footer>
+
+<script>
+// أوراق أزهار الكرز المتساقطة
+const petals = document.getElementById("petals");
+
+for (let i = 0; i < 35; i++) {
+  const petal = document.createElement("div");
+  petal.className = "petal";
+  petal.style.left = Math.random() * 100 + "%";
+  petal.style.animationDuration = (7 + Math.random() * 10) + "s";
+  petal.style.animationDelay = (Math.random() * 10) + "s";
+  petal.style.transform = `scale(${0.5 + Math.random()})`;
+  petals.appendChild(petal);
+}
+
+// حركة ثلاثية الأبعاد للمقدمة
+const hero = document.getElementById("heroContent");
+
+document.addEventListener("mousemove", (e) => {
+  if (window.innerWidth < 700) return;
+
+  const x = (window.innerWidth / 2 - e.clientX) / 70;
+  const y = (window.innerHeight / 2 - e.clientY) / 70;
+
+  hero.style.transform =
+    `rotateY(${x}deg) rotateX(${-y}deg)`;
+});
+
+document.addEventListener("mouseleave", () => {
+  hero.style.transform = "rotateY(0) rotateX(0)";
+});
+
+// ظهور الأقسام أثناء التمرير
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show");
+    }
+  });
+}, {threshold:0.12});
+
+document.querySelectorAll(".reveal").forEach(el => {
+  observer.observe(el);
+});
+</script>
+
+</body>
+</html>
