@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MADA | رحلة القهوة</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap');
+
+:root{--gold:#c89b62;--cream:#f4eadb;--dark:#090807;--panel:#17120e}
+
+*{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
+body{margin:0;background:var(--dark);color:var(--cream);font-family:'Cairo',sans-serif}
+
+button{font:inherit;cursor:pointer}
+
+.hero{min-height:100svh;position:relative;overflow:hidden;display:grid;place-items:center;text-align:center;background:linear-gradient(180deg,rgba(0,0,0,.22),#090807 98%),url('https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=2000&q=90') center/cover}
+
+.hero:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 10%,rgba(0,0,0,.68) 85%);pointer-events:none}
+
+.hero-content{position:relative;z-index:2;padding:30px;animation:rise 1.5s both}
+
+.eyebrow{letter-spacing:5px;color:var(--gold);font-size:12px}
+
+.hero h1{font-size:clamp(48px,10vw,112px);line-height:1.1;margin:12px 0;font-weight:900;text-shadow:0 8px 35px #000}
+
+.hero p{color:#e4d5c3;max-width:550px;margin:16px auto 28px}
+
+.gold-btn{border:1px solid var(--gold);background:var(--gold);color:#17100a;padding:13px 30px;border-radius:2px;font-weight:800;transition:.3s}
+
+.gold-btn:hover{background:transparent;color:var(--gold);transform:translateY(-3px)}
+
+.bean{position:absolute;width:42px;height:65px;border-radius:50%;background:radial-gradient(ellipse at 30% 25%,#b77a3c,#4a2412 55%,#160b06);box-shadow:inset -8px -5px 12px #090403,0 12px 28px #0009;z-index:1;animation:float 8s ease-in-out infinite}
+
+.bean:after{content:"";position:absolute;width:5px;height:78%;left:50%;top:11%;border-radius:50%;background:#1b0b05;transform:rotate(12deg);box-shadow:1px 0 2px #d49a5c}
+
+.b1{top:18%;left:13%;transform:rotate(28deg)}
+
+.b2{top:60%;right:12%;width:30px;height:48px;animation-delay:-3s}
+
+.b3{top:30%;right:22%;width:22px;height:36px;animation-delay:-5s}
+
+.b4{bottom:15%;left:27%;width:28px;height:44px;animation-delay:-2s}
+
+@keyframes float{0%,100%{translate:0 0;rotate:0deg}50%{translate:18px -35px;rotate:35deg}}
+
+@keyframes rise{from{opacity:0;transform:translateY(35px)}to{opacity:1;transform:none}}
+
+section{padding:90px 7vw}
+
+.section-head{text-align:center;margin-bottom:42px}
+
+.section-head small{color:var(--gold);letter-spacing:3px}
+
+.section-head h2{font-size:clamp(30px,5vw,52px);margin:8px 0}
+
+.section-head p{color:#b9a999;max-width:650px;margin:auto}
+
+.story{background:linear-gradient(#090807,#100c09)}
+
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+
+.step{min-height:230px;padding:25px;background:linear-gradient(145deg,#21170f,#100d0a);border:1px solid #4b3523;position:relative;overflow:hidden}
+
+.step span{font-size:34px;color:var(--gold)}
+
+.step h3{margin:12px 0 5px}
+
+.step p{color:#b9aa9a;font-size:14px;line-height:1.9}
+
+.step:after{content:"";position:absolute;width:120px;height:120px;border-radius:50%;background:#b8793620;filter:blur(25px);bottom:-60px;left:-25px}
+
+.roast{min-height:420px;display:flex;align-items:center;background:linear-gradient(90deg,#090807 5%,#090807cc 55%,#09080722),url('https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=1800&q=90') center/cover}
+
+.roast div{max-width:560px}
+
+.roast h2{font-size:clamp(34px,6vw,64px);line-height:1.2}
+
+.roast p{color:#d2c1ad;line-height:2}
+
+.products{background:#100c09}
+
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+
+.product{background:#1a130e;border:1px solid #382719;overflow:hidden}
+
+.product img{width:100%;height:245px;object-fit:cover;display:block;transition:transform .7s}
+
+.product:hover img{transform:scale(1.07)}
+
+.product-info{padding:18px}
+
+.product-info p{color:#b9a999;font-size:13px;min-height:45px}
+
+.price-row{display:flex;align-items:center;justify-content:space-between}
+
+.price{color:var(--gold);font-weight:800}
+
+.add{background:transparent;color:var(--gold);border:1px solid var(--gold);padding:8px 15px}
+
+.add:hover{background:var(--gold);color:#100c09}
+
+nav{position:fixed;top:0;right:0;left:0;z-index:10;padding:14px 6vw;display:flex;justify-content:space-between;align-items:center;background:#080604b8;backdrop-filter:blur(12px);border-bottom:1px solid #ffffff12}
+
+.brand{font-weight:900;letter-spacing:3px;color:var(--gold);font-size:23px}
+
+.cart-btn{border:1px solid #87613d;background:#17100b;color:var(--cream);padding:8px 15px}
+
+.cart-btn b{color:var(--gold)}
+
+footer{text-align:center;padding:35px;color:#9e8d7b;border-top:1px solid #382719}
+
+.drawer{position:fixed;z-index:30;inset:0;background:#0009;display:none}
+
+.drawer.open{display:block}
+
+.cart-panel{position:absolute;right:0;top:0;height:100%;width:min(420px,92vw);background:#17110c;padding:25px;overflow:auto;box-shadow:-15px 0 40px #0008}
+
+.cart-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #493321;padding-bottom:12px}
+
+.close{background:none;border:0;color:var(--cream);font-size:25px}
+
+.cart-item{display:flex;justify-content:space-between;gap:12px;padding:15px 0;border-bottom:1px solid #493321}
+
+.cart-item small{display:block;color:#b9a999}
+
+.qty button{background:#342315;color:white;border:0;padding:4px 9px}
+
+.total{display:flex;justify-content:space-between;margin:25px 0;font-size:20px;color:var(--gold)}
+
+.checkout{width:100%}
+
+.modal{display:none;position:fixed;z-index:40;inset:0;background:#000c;place-items:center;padding:20px}
+
+.modal.open{display:grid}
+
+.modal-box{width:min(460px,100%);background:#17110c;border:1px solid #765333;padding:25px}
+
+.modal-box input,.modal-box textarea{width:100%;margin:7px 0 13px;padding:12px;background:#0c0907;border:1px solid #493321;color:white;font:inherit}
+
+.modal-box label{font-size:13px;color:#cbb9a6}
+
+@media(max-width:800px){.steps{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:repeat(2,1fr)}section{padding:70px 5vw}.hero{min-height:92svh}}
+
+@media(max-width:520px){.steps,.grid{grid-template-columns:1fr}.product img{height:260px}.hero h1{font-size:55px}.roast{background-position:60% center}}
+
+</style>
+
+</head>
+
+<body>
+
+<nav>
+
+<div class="brand">MADA</div>
+
+<button class="cart-btn" onclick="toggleCart()">السلة <b id="count">0</b></button>
+
+</nav>
+
+<header class="hero">
+
+<i class="bean b1"></i>
+
+<i class="bean b2"></i>
+
+<i class="bean b3"></i>
+
+<i class="bean b4"></i>
+
+<div class="hero-content">
+
+<div class="eyebrow">من حبةٍ صغيرة تبدأ الحكاية</div>
+
+<h1>MADA</h1>
+
+<p>رحلة القهوة من أعماق المزارع إلى دفء فنجانك. نختار الحبوب بعناية، ونحمّصها بشغف، لتصل إليك بتجربة لا تُنسى.</p>
+
+<button class="gold-btn" onclick="document.getElementById('story').scrollIntoView()">اكتشف الرحلة</button>
+
+</div>
+
+</header>
+
+<section class="story" id="story">
+
+<div class="section-head">
+
+<small>THE COFFEE JOURNEY</small>
+
+<h2>كل حبة لها حكاية</h2>
+
+<p>رحلة طويلة من الطبيعة إلى فنجانك، تبدأ بعناية وتنتهي بلحظة تستحق التمهّل.</p>
+
+</div>
+
+<div class="steps">
+
+<article class="step">
+
+<span>01</span><h3>المزرعة والنمو</h3>
+
+<p>تنمو أشجار البن في بيئة مناسبة، وتتفتح أزهارها قبل أن تنضج ثمارها.</p>
+
+</article>
+
+<article class="step">
+
+<span>02</span><h3>قطف الثمار</h3>
+
+<p>تُقطف حبات الكرز الناضجة بعناية استعدادًا لاستخراج بذور القهوة.</p>
+
+</article>
+
+<article class="step">
+
+<span>03</span><h3>المعالجة والتحميص</h3>
+
+<p>تُعالج الحبوب وتجفف، ثم تدخل محمصة تكشف روائحها ونكهاتها.</p>
+
+</article>
+
+<article class="step">
+
+<span>04</span><h3>الطحن والتحضير</h3>
+
+<p>تُطحن الحبوب وتُحضّر باحتراف لتصل إلى فنجانك بطعم متوازن.</p>
+
+</article>
+
+</div>
+
+</section>
+
+<section class="roast">
+
+<div>
+
+<small style="color:var(--gold);letter-spacing:3px">THE ART OF ROASTING</small>
+
+<h2>من صوت التحميص<br>تبدأ النكهة</h2>
+
+<p>حرارة محسوبة ووقت دقيق، لتتحول حبوب البن الخضراء إلى حبوب غنية بالعطر والعمق.</p>
+
+<button class="gold-btn" onclick="document.getElementById('shop').scrollIntoView()">تسوّق قهوتك</button>
+
+</div>
+
+</section>
+
+<section class="products" id="shop">
+
+<div class="section-head">
+
+<small>OUR COLLECTION</small>
+
+<h2>اختر نكهتك المفضلة</h2>
+
+<p>مجموعة مختارة لعشاق القهوة، من النكهات المتوازنة إلى الإيحاءات الغنية.</p>
+
+</div>
+
+<div class="grid" id="products"></div>
+
+</section>
+
+<footer>MADA COFFEE — صُنعت القهوة لتُعاش لحظتها</footer>
+
+<div class="drawer" id="drawer" onclick="if(event.target===this)toggleCart()">
+
+<div class="cart-panel">
+
+<div class="cart-head">
+
+<h2>سلة مشترياتك</h2>
+
+<button class="close" onclick="toggleCart()">×</button>
+
+</div>
+
+<div id="cartItems"></div>
+
+<div class="total"><span>الإجمالي</span><b id="total">0 ر.س</b></div>
+
+<button class="gold-btn checkout" onclick="openCheckout()">إتمام الطلب</button>
+
+</div>
+
+</div>
+
+<div class="modal" id="modal">
+
+<div class="modal-box">
+
+<div class="cart-head">
+
+<h2>بيانات الطلب</h2>
+
+<button class="close" onclick="closeCheckout()">×</button>
+
+</div>
+
+<form onsubmit="submitOrder(event)">
+
+<label>الاسم</label>
+
+<input required placeholder="الاسم الكامل">
+
+<label>رقم التواصل</label>
+
+<input required type="tel" placeholder="05xxxxxxxx">
+
+<label>العنوان</label>
+
+<textarea required rows="3" placeholder="المدينة والحي والعنوان"></textarea>
+
+<button class="gold-btn checkout">تأكيد الطلب التجريبي</button>
+
+<p style="font-size:11px;color:#a99886">هذه صفحة تجريبية ولا تتم معالجة مدفوعات حقيقية.</p>
+
+</form>
+
+</div>
+
+</div>
+
+<script>
+
+const items=[
+
+{id:1,name:'إثيوبيا — قوجي',desc:'إيحاءات زهرية وفاكهية وحلاوة ناعمة.',price:48,img:'https://images.unsplash.com/photo-1559525839-b184a4d698c7?auto=format&fit=crop&w=900&q=85'},
+
+{id:2,name:'كولومبيا — هويلا',desc:'نكهة متوازنة مع لمسات الكراميل والمكسرات.',price:52,img:'https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=900&q=85'},
+
+{id:3,name:'البرازيل — سانتوس',desc:'قوام غني ونكهة شوكولاتة لطيفة.',price:45,img:'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=900&q=85'},
+
+{id:4,name:'خلطة MADA',desc:'خلطة يومية متوازنة للإسبريسو والقهوة السوداء.',price:50,img:'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=85'},
+
+{id:5,name:'قهوة V60',desc:'تحميص مناسب للتقطير وإبراز التفاصيل.',price:55,img:'https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=900&q=85'},
+
+{id:6,name:'إسبريسو داكن',desc:'قوام قوي ونهاية غنية لمحبي النكهة العميقة.',price:49,img:'https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?auto=format&fit=crop&w=900&q=85'}
+
+];
+
+let cart=[];
+
+function renderProducts(){
+
+document.getElementById('products').innerHTML=items.map(p=>`
+
+<article class="product">
+
+<img src="${p.img}" alt="${p.name}" loading="lazy">
+
+<div class="product-info">
+
+<h3>${p.name}</h3>
+
+<p>${p.desc}</p>
+
+<div class="price-row">
+
+<span class="price">${p.price} ر.س</span>
+
+<button class="add" onclick="add(${p.id})">أضف للسلة +</button>
+
+</div>
+
+</div>
+
+</article>`).join('');
+
+}
+
+function add(id){
+
+let x=cart.find(i=>i.id===id);
+
+x?x.qty++:cart.push({id,qty:1});
+
+renderCart();
+
+}
+
+function change(id,d){
+
+let x=cart.find(i=>i.id===id);
+
+if(!x)return;
+
+x.qty+=d;
+
+if(x.qty<1)cart=cart.filter(i=>i.id!==id);
+
+renderCart();
+
+}
+
+function renderCart(){
+
+let count=cart.reduce((a,b)=>a+b.qty,0);
+
+let sum=cart.reduce((a,b)=>a+items.find(p=>p.id===b.id).price*b.qty,0);
+
+document.getElementById('count').textContent=count;
+
+document.getElementById('total').textContent=sum+' ر.س';
+
+document.getElementById('cartItems').innerHTML=cart.length?
+
+cart.map(c=>{
+
+let p=items.find(x=>x.id===c.id);
+
+return `<div class="cart-item">
+
+<div><b>${p.name}</b><small>${p.price} ر.س × ${c.qty}</small></div>
+
+<div class="qty">
+
+<button onclick="change(${c.id},-1)">−</button>
+
+${c.qty}
+
+<button onclick="change(${c.id},1)">+</button>
+
+</div>
+
+</div>`;
+
+}).join(''):
+
+'<p style="color:#b9a999">السلة فارغة، اختر قهوتك المفضلة.</p>';
+
+}
+
+function toggleCart(){
+
+document.getElementById('drawer').classList.toggle('open');
+
+}
+
+function openCheckout(){
+
+if(!cart.length){alert('السلة فارغة');return}
+
+document.getElementById('modal').classList.add('open');
+
+}
+
+function closeCheckout(){
+
+document.getElementById('modal').classList.remove('open');
+
+}
+
+function submitOrder(e){
+
+e.preventDefault();
+
+alert('تم تسجيل طلبك التجريبي. لا توجد عملية دفع فعلية.');
+
+cart=[];
+
+renderCart();
+
+closeCheckout();
+
+toggleCart();
+
+}
+
+renderProducts();
+
+renderCart();
+
+</script>
+
+</body>
+
+</html>

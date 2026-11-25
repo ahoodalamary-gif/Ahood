@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ÉON — Atelier of Time</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Manrope:wght@300;400;500;600;700;800&display=swap');
+
+:root{--ink:#171817;--muted:#777b78;--paper:#eeeae2;--white:#faf9f6;--line:#d8d4cc;--accent:#a78b65}
+
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:'Cairo',sans-serif}button{font:inherit;cursor:pointer}a{color:inherit;text-decoration:none}
+
+.top{height:42px;background:#171817;color:#eeeae2;display:flex;align-items:center;justify-content:center;font:10px Manrope,sans-serif;letter-spacing:3px}
+
+nav{height:76px;padding:0 6vw;display:flex;align-items:center;justify-content:space-between;background:#f8f7f3eF;backdrop-filter:blur(15px);position:sticky;top:0;z-index:20;border-bottom:1px solid #d9d5cc}
+
+.logo{font:800 25px Manrope,sans-serif;letter-spacing:7px}.navlinks{display:flex;gap:30px;font-size:12px;color:#555}.navlinks a:hover{color:var(--accent)}.cart{border:1px solid #aaa49a;background:transparent;padding:9px 16px;font-size:12px}
+
+.hero{min-height:calc(100svh - 118px);position:relative;overflow:hidden;background:radial-gradient(ellipse at 52% 48%,#fff 0,#f1eee8 48%,#dedbd4 100%);display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:50px 9vw}
+
+.hero-copy{z-index:2}.eyebrow{font:11px Manrope,sans-serif;letter-spacing:4px;color:#8e795d}.hero h1{font:300 clamp(48px,7vw,100px)/.98 Manrope,sans-serif;letter-spacing:-5px;margin:25px 0 18px}.hero h1 span{display:block;font-weight:700}.hero p{max-width:390px;color:#666d69;font-size:14px;line-height:2}.btn{display:inline-flex;align-items:center;gap:22px;background:#191b19;color:white;border:0;padding:15px 23px;margin-top:20px;font-size:12px;transition:.3s}.btn:hover{background:var(--accent);transform:translateY(-3px)}
+
+.stage{height:min(68vw,570px);min-height:330px;position:relative;perspective:1000px;display:grid;place-items:center;--rx:0deg;--ry:0deg}
+
+.watch-img{width:min(95%,500px);height:100%;object-fit:contain;filter:drop-shadow(0 35px 28px #0002);transform:rotateX(var(--rx)) rotateY(var(--ry)) translateZ(30px);transition:transform .18s ease-out;position:relative;z-index:3}
+
+.orbit{position:absolute;width:76%;aspect-ratio:1;border:1px solid #c9c3b9;border-radius:50%;transform:rotateX(68deg);animation:spin 25s linear infinite}
+
+.orbit:before,.orbit:after{content:"";position:absolute;width:7px;height:7px;border-radius:50%;background:#9b815f;top:12%;left:17%}.orbit:after{top:auto;left:auto;right:13%;bottom:20%;width:4px;height:4px}
+
+.hint{position:absolute;bottom:18px;right:50%;transform:translateX(50%);font:9px Manrope,sans-serif;letter-spacing:3px;color:#888;white-space:nowrap}
+
+@keyframes spin{to{transform:rotateX(68deg) rotateZ(360deg)}}
+
+.section{padding:100px 8vw}.center{text-align:center}.kicker{font:10px Manrope,sans-serif;letter-spacing:4px;color:#9b805d}.section h2{font:300 clamp(35px,5vw,62px)/1.1 Manrope,sans-serif;margin:15px 0 12px;letter-spacing:-2px}.lead{max-width:570px;margin:0 auto;color:#777;font-size:13px;line-height:2}
+
+.feature{background:#171a19;color:#f3f0e9;display:grid;grid-template-columns:1fr 1fr;min-height:540px;align-items:center;padding:70px 9vw;gap:50px}.feature img{width:100%;height:410px;object-fit:cover;filter:grayscale(1)}.feature h2{font:300 clamp(38px,5vw,65px)/1.1 Manrope,sans-serif;margin:16px 0}.feature p{color:#b4b7b2;line-height:2;font-size:13px;max-width:430px}.specs{display:flex;gap:35px;margin-top:35px}.specs b{display:block;font:20px Manrope;color:#c3a77f}.specs small{font-size:10px;color:#aaa}
+
+.explode{background:#f8f7f3;overflow:hidden}.explode-wrap{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:40px;max-width:1100px;margin:55px auto 0}.exploded{height:400px;position:relative;display:grid;place-items:center;perspective:800px}.exploded img{width:80%;height:100%;object-fit:contain;filter:drop-shadow(0 20px 20px #0001);animation:floatwatch 5s ease-in-out infinite}.axis{position:absolute;height:78%;width:1px;background:linear-gradient(transparent,#b9aa94,transparent);top:11%;left:50%}
+
+@keyframes floatwatch{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-12px) rotate(2deg)}}
+
+.parts{display:grid;gap:24px}.part{border-top:1px solid var(--line);padding-top:15px;display:flex;gap:18px}.part span{font:12px Manrope;color:#a28a6a}.part h3{margin:0;font-size:15px}.part p{margin:4px 0;color:#888;font-size:12px;line-height:1.8}
+
+.shop{background:#e7e3db}.shop-head{display:flex;align-items:end;justify-content:space-between;margin-bottom:35px}.shop-head h2{margin:10px 0 0}.products{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.product{background:#f8f7f3;border:1px solid #dedad2;transition:.35s;overflow:hidden}.product:hover{transform:translateY(-7px);box-shadow:0 18px 40px #0000000c}.product-photo{height:300px;background:linear-gradient(145deg,#f9f8f5,#e4e0d8);display:grid;place-items:center;overflow:hidden}.product-photo img{width:90%;height:95%;object-fit:contain;transition:.5s;filter:drop-shadow(0 18px 15px #0002)}.product:hover .product-photo img{transform:scale(1.06) rotate(-3deg)}.product-info{padding:18px}.product-info h3{font-size:15px;margin:0}.product-info p{font-size:11px;color:#888}.product-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:15px}.price{font:600 15px Manrope}.add{background:#1b1d1b;color:white;border:0;padding:10px 14px;font-size:11px}.add:hover{background:var(--accent)}
+
+footer{background:#171a19;color:#d8d5ce;padding:45px 8vw;display:flex;justify-content:space-between;align-items:center}.footlogo{font:700 23px Manrope;letter-spacing:6px}footer small{color:#92958f;font-size:10px}
+
+.overlay{display:none;position:fixed;inset:0;background:#0008;z-index:50}.overlay.open{display:block}.drawer{position:absolute;right:0;top:0;height:100%;width:min(430px,94vw);background:#f8f7f3;padding:25px;overflow:auto}.drawer-head{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:15px}.x{border:0;background:none;font-size:25px}.cartline{display:flex;justify-content:space-between;padding:18px 0;border-bottom:1px solid var(--line);font-size:13px}.cartline small{display:block;color:#888}.qty button{border:1px solid #bbb;background:none;padding:3px 9px}.sum{display:flex;justify-content:space-between;margin:25px 0;font-weight:700}.pay{width:100%;background:#171a19;color:white;border:0;padding:15px}
+
+.modal{display:none;position:fixed;inset:0;z-index:60;background:#0009;place-items:center;padding:20px}.modal.open{display:grid}.modalbox{background:#f8f7f3;padding:25px;width:min(440px,100%)}.modalbox input,.modalbox textarea{width:100%;padding:12px;border:1px solid #ccc;background:white;margin:7px 0 14px;font:12px Cairo}.modalbox label{font-size:12px}
+
+@media(max-width:800px){.hero{grid-template-columns:1fr;padding:55px 7vw 30px;text-align:center}.hero-copy{order:2}.stage{order:1;height:360px}.hero p{margin:15px auto}.feature,.explode-wrap{grid-template-columns:1fr}.feature img{height:300px}.products{grid-template-columns:repeat(2,1fr)}.navlinks{display:none}.section{padding:75px 6vw}}
+
+@media(max-width:520px){.products{grid-template-columns:1fr}.product-photo{height:330px}.shop-head{display:block}.specs{gap:18px}.stage{min-height:290px}.hero h1{font-size:65px}footer{display:block;text-align:center}footer small{display:block;margin-top:15px}}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="top">A STUDY IN PRECISION · EST. 1984</div>
+
+<nav>
+
+<div class="logo">ÉON</div>
+
+<div class="navlinks"><a href="#story">الحكاية</a><a href="#craft">الحرفية</a><a href="#shop">المجموعة</a></div>
+
+<button class="cart" onclick="toggleCart()">حقيبة التسوق <span id="count">0</span></button>
+
+</nav>
+
+<header class="hero">
+
+<div class="hero-copy">
+
+<div class="eyebrow">THE ART OF TIMEKEEPING</div>
+
+<h1>TIME,<span>REFINED.</span></h1>
+
+<p>حيث تلتقي الهندسة الدقيقة بجمال التفاصيل. ساعات صُممت لترافق لحظاتك، وتبقى أبعد من حدود الزمن.</p>
+
+<a class="btn" href="#shop">اكتشف المجموعة <span>↗</span></a>
+
+</div>
+
+<div class="stage" id="stage">
+
+<div class="orbit"></div>
+
+<img class="watch-img" src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1100&q=90" alt="ساعة أنيقة">
+
+<div class="hint">حرّك المؤشر لاستكشاف الساعة · MOVE TO EXPLORE</div>
+
+</div>
+
+</header>
+
+<section class="section center" id="story">
+
+<div class="kicker">BEYOND THE MOMENT</div>
+
+<h2>كل ثانية، بتفاصيلها</h2>
+
+<p class="lead">ليست الساعة مجرد أداة لقياس الوقت؛ إنها توازن بين التصميم، والدقة، والحضور الهادئ. في ÉON نؤمن أن التفاصيل الصغيرة تصنع الفرق الكبير.</p>
+
+</section>
+
+<section class="feature" id="craft">
+
+<img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=1200&q=85" alt="تفاصيل ساعة معدنية">
+
+<div>
+
+<div class="kicker">ENGINEERED TO LAST</div>
+
+<h2>دقةٌ تُرى<br>ولا تُنسى.</h2>
+
+<p>من انسيابية الهيكل إلى حركة العقارب، صُممت كل قطعة لتجمع بين الراحة والأناقة والاهتمام بالتفاصيل. خامات مختارة ولمسات نهائية تمنح الساعة حضورها الخاص.</p>
+
+<div class="specs"><div><b>316L</b><small>فولاذ مقاوم</small></div><div><b>5 ATM</b><small>مقاومة الماء</small></div><div><b>01</b><small>تصميم متوازن</small></div></div>
+
+</div>
+
+</section>
+
+<section class="section explode">
+
+<div class="center"><div class="kicker">INSIDE THE DESIGN</div><h2>الجمال في كل طبقة</h2><p class="lead">من الميناء إلى السوار، كل عنصر له وظيفة وجماله الخاص.</p></div>
+
+<div class="explode-wrap">
+
+<div class="exploded"><div class="axis"></div><img src="https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&w=1000&q=90" alt="ساعة بتفاصيل دقيقة"></div>
+
+<div class="parts">
+
+<div class="part"><span>01</span><div><h3>الميناء — The Dial</h3><p>واجهة واضحة ومتوازنة، تمنح القراءة حضورًا أنيقًا.</p></div></div>
+
+<div class="part"><span>02</span><div><h3>الهيكل — The Case</h3><p>خطوط مصقولة وحواف مدروسة تحمي التفاصيل الداخلية.</p></div></div>
+
+<div class="part"><span>03</span><div><h3>السوار — The Bracelet</h3><p>وصلات معدنية متناسقة لارتداء مريح ومظهر متكامل.</p></div></div>
+
+<div class="part"><span>04</span><div><h3>الحركة — The Movement</h3><p>آلية دقيقة تمنح كل ثانية إيقاعها الخاص.</p></div></div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section shop" id="shop">
+
+<div class="shop-head"><div><div class="kicker">THE ÉON COLLECTION</div><h2>اختر وقتك</h2></div><p class="lead" style="max-width:300px;margin:0">مجموعة مختارة من الساعات بتصاميم كلاسيكية وعصرية.</p></div>
+
+<div class="products" id="products"></div>
+
+</section>
+
+<footer><div class="footlogo">ÉON</div><small>TIME IS YOURS. MAKE IT MATTER. © 2026 ÉON</small></footer>
+
+<div class="overlay" id="overlay" onclick="if(event.target===this)toggleCart()"><aside class="drawer">
+
+<div class="drawer-head"><h3>حقيبة التسوق</h3><button class="x" onclick="toggleCart()">×</button></div>
+
+<div id="cartItems"></div><div class="sum"><span>الإجمالي</span><b id="total">0 ر.س</b></div>
+
+<button class="pay" onclick="checkout()">متابعة إلى الدفع</button>
+
+</aside></div>
+
+<div class="modal" id="modal"><div class="modalbox">
+
+<div class="drawer-head"><h3>إتمام الطلب</h3><button class="x" onclick="closeModal()">×</button></div>
+
+<form onsubmit="placeOrder(event)">
+
+<label>الاسم الكامل</label><input required placeholder="اكتب اسمك">
+
+<label>رقم التواصل</label><input required type="tel" placeholder="05xxxxxxxx">
+
+<label>العنوان</label><textarea required rows="3" placeholder="المدينة والحي والعنوان"></textarea>
+
+<button class="pay">تأكيد الطلب التجريبي</button>
+
+<p style="font-size:10px;color:#888">نموذج تجريبي فقط، لا تتم معالجة مدفوعات حقيقية.</p>
+
+</form>
+
+</div></div>
+
+<script>
+
+const watches=[
+
+{id:1,name:'ÉON CLASSIC',desc:'تصميم كلاسيكي بسوار معدني فضي.',price:690,img:'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=85'},
+
+{id:2,name:'ÉON CHRONO',desc:'مظهر رياضي بتفاصيل دقيقة.',price:890,img:'https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=900&q=85'},
+
+{id:3,name:'ÉON MINIMAL',desc:'بساطة راقية تناسب كل يوم.',price:540,img:'https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=900&q=85'},
+
+{id:4,name:'ÉON SILVER',desc:'هيكل معدني ولمعة هادئة.',price:750,img:'https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&w=900&q=85'},
+
+{id:5,name:'ÉON HERITAGE',desc:'روح كلاسيكية بتفاصيل معاصرة.',price:820,img:'https://images.unsplash.com/photo-1434056886845-dac89ffe9b56?auto=format&fit=crop&w=900&q=85'},
+
+{id:6,name:'ÉON BLACK',desc:'تصميم داكن بحضور قوي.',price:780,img:'https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=900&q=85'}
+
+];
+
+let cart=[];
+
+document.getElementById('products').innerHTML=watches.map(w=>`<article class="product"><div class="product-photo"><img src="${w.img}" alt="${w.name}" loading="lazy"></div><div class="product-info"><h3>${w.name}</h3><p>${w.desc}</p><div class="product-bottom"><span class="price">${w.price} ر.س</span><button class="add" onclick="add(${w.id})">أضف للحقيبة +</button></div></div></article>`).join('');
+
+function add(id){let x=cart.find(i=>i.id===id);x?x.qty++:cart.push({id,qty:1});renderCart()}
+
+function change(id,n){let x=cart.find(i=>i.id===id);if(!x)return;x.qty+=n;if(x.qty<1)cart=cart.filter(i=>i.id!==id);renderCart()}
+
+function renderCart(){let count=cart.reduce((s,x)=>s+x.qty,0),sum=cart.reduce((s,x)=>s+watches.find(w=>w.id===x.id).price*x.qty,0);document.getElementById('count').textContent=count;document.getElementById('total').textContent=sum+' ر.س';document.getElementById('cartItems').innerHTML=cart.length?cart.map(x=>{let w=watches.find(a=>a.id===x.id);return `<div class="cartline"><div><b>${w.name}</b><small>${w.price} ر.س × ${x.qty}</small></div><div class="qty"><button onclick="change(${x.id},-1)">−</button> ${x.qty} <button onclick="change(${x.id},1)">+</button></div></div>`}).join(''):'<p style="color:#888">حقيبتك فارغة حاليًا.</p>'}
+
+function toggleCart(){document.getElementById('overlay').classList.toggle('open')}
+
+function checkout(){if(!cart.length){alert('حقيبة التسوق فارغة');return}document.getElementById('modal').classList.add('open')}
+
+function closeModal(){document.getElementById('modal').classList.remove('open')}
+
+function placeOrder(e){e.preventDefault();alert('تم تسجيل الطلب التجريبي. لا توجد عملية دفع فعلية.');cart=[];renderCart();closeModal();toggleCart()}
+
+renderCart();
+
+const stage=document.getElementById('stage');
+
+stage.addEventListener('mousemove',e=>{const r=stage.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5;const y=(e.clientY-r.top)/r.height-.5;stage.style.setProperty('--ry',`${x*22}deg`);stage.style.setProperty('--rx',`${-y*18}deg`)});
+
+stage.addEventListener('mouseleave',()=>{stage.style.setProperty('--rx','0deg');stage.style.setProperty('--ry','0deg')});
+
+</script>
+
+</body>
+
+</html>
